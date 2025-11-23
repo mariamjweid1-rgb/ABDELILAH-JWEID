@@ -131,7 +131,7 @@ export const OutfitChanger: React.FC = () => {
     img.crossOrigin = "anonymous";
     img.src = finalImage;
     
-    // Logo path - Ensure it matches exactly
+    // Logo path - Ensure it matches exactly the file in public
     const logoUrl = "/Mariam_women_kids.jpg"; 
 
     img.onload = () => {
@@ -155,7 +155,9 @@ export const OutfitChanger: React.FC = () => {
         const saveCanvas = () => {
             const a = document.createElement('a');
             a.href = canvas.toDataURL('image/png');
-            a.download = `mariam_pose_${activeResultIndex}_${dlQuality}.png`;
+            // Include Pose Name in filename
+            const poseName = posesLabels[activeResultIndex].split('(')[1].replace(')', '');
+            a.download = `mariam_style_${poseName}_${Date.now()}.png`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
@@ -163,12 +165,12 @@ export const OutfitChanger: React.FC = () => {
 
         // --- Watermark Logic ---
         const drawWatermark = (imageObj?: HTMLImageElement) => {
-            const padding = width * 0.02; // 2% padding from edge
+            const padding = width * 0.03; // 3% padding from edge
 
             if (imageObj) {
                 // 1. DRAW LOGO IMAGE
-                // Size: Small (10% of width)
-                const logoWidth = width * 0.10; 
+                // Size: Small (10% of width) for elegance
+                const logoWidth = width * 0.12; 
                 const logoAspect = imageObj.naturalHeight / imageObj.naturalWidth;
                 const logoHeight = logoWidth * logoAspect;
 
@@ -178,17 +180,23 @@ export const OutfitChanger: React.FC = () => {
 
                 // Shadow for visibility
                 ctx.shadowColor = "rgba(0,0,0,0.5)";
-                ctx.shadowBlur = 6;
+                ctx.shadowBlur = 10;
                 ctx.shadowOffsetX = 2;
                 ctx.shadowOffsetY = 2;
                 
+                // Draw Circular Clip for Logo
+                ctx.save();
+                ctx.beginPath();
+                // Draw logo rectangle
                 ctx.drawImage(imageObj, x, y, logoWidth, logoHeight);
+                ctx.restore();
+                
                 ctx.shadowColor = "transparent";
 
             } else {
                 // 2. FALLBACK: DRAW GOLDEN TEXT
                 // Only if image fails to load
-                const fontSize = Math.max(20, width * 0.035); 
+                const fontSize = Math.max(24, width * 0.04); 
                 ctx.font = `900 ${fontSize}px 'Tajawal', sans-serif`;
                 const text = "MARIAM WOMEN & KIDS";
                 
@@ -197,9 +205,9 @@ export const OutfitChanger: React.FC = () => {
                 
                 // Strong Shadow
                 ctx.shadowColor = "rgba(0,0,0,0.9)";
-                ctx.shadowBlur = 10;
-                ctx.shadowOffsetX = 3;
-                ctx.shadowOffsetY = 3;
+                ctx.shadowBlur = 15;
+                ctx.shadowOffsetX = 4;
+                ctx.shadowOffsetY = 4;
                 
                 // Gold Gradient Text
                 const gradient = ctx.createLinearGradient(x, y - fontSize, x + ctx.measureText(text).width, y);

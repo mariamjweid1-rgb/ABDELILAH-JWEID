@@ -58,11 +58,12 @@ const App: React.FC = () => {
         >
             <div className="text-center animate-fade-in flex flex-col items-center w-full max-w-4xl px-4 relative">
                 
-                {/* Circular Animation Container - Force LTR for SVG to render text path correctly */}
-                <div className="relative w-[380px] h-[380px] md:w-[550px] md:h-[550px] flex items-center justify-center" dir="ltr">
+                {/* Circular Animation Container */}
+                {/* Increased size to fit button comfortably inside */}
+                <div className="relative w-[340px] h-[340px] md:w-[600px] md:h-[600px] flex items-center justify-center" dir="ltr">
                     
-                    {/* Rotating Ring Text */}
-                    <div className="absolute inset-0 animate-spin-slow pointer-events-none">
+                    {/* 1. Rotating Ring Text (Background Layer) */}
+                    <div className="absolute inset-0 animate-spin-slow pointer-events-none opacity-90">
                          <svg className="w-full h-full overflow-visible" viewBox="0 0 500 500">
                              <defs>
                                  <path id="textCircle" d="M 250, 250 m -200, 0 a 200,200 0 1,1 400,0 a 200,200 0 1,1 -400,0" fill="none"/>
@@ -72,7 +73,7 @@ const App: React.FC = () => {
                                     <stop offset="100%" stopColor="#AA771C" />
                                 </linearGradient>
                              </defs>
-                             <text className="text-[15px] md:text-[19px] font-bold tracking-[4px] uppercase" fill="url(#goldGradient)">
+                             <text className="text-[14px] md:text-[17px] font-bold tracking-[3px] uppercase" fill="url(#goldGradient)">
                                  <textPath href="#textCircle" startOffset="0%">
                                      منصة تختصر عليك الوقت لتركز في تسويق منتجاتك ✦ أطلق العنان لرؤيتك، ودعنا نبتكر المشهد ✦
                                  </textPath>
@@ -80,31 +81,34 @@ const App: React.FC = () => {
                          </svg>
                     </div>
                     
-                    {/* Center Logo & Title & Button */}
+                    {/* 2. Static Center Content (Foreground Layer) */}
                     <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-4" dir="rtl">
                         
                         {/* Glowing Orb Background behind logo */}
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl animate-pulse"></div>
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 md:w-80 md:h-80 bg-yellow-500/10 rounded-full blur-3xl animate-pulse -z-10"></div>
 
+                        {/* Logo */}
                         <img 
                             src="/Mariam_women_kids.jpg" 
                             onError={(e) => {
                                 e.currentTarget.style.display = 'none';
                             }}
                             alt="Mariam Women & Kids" 
-                            className="h-24 md:h-32 object-contain drop-shadow-2xl mb-3 rounded-full border-2 border-yellow-500/30"
+                            className="h-20 w-20 md:h-28 md:w-28 object-contain drop-shadow-2xl mb-2 rounded-full border-2 border-yellow-500/30 shadow-[0_0_20px_rgba(234,179,8,0.2)]"
                         />
                         
-                        <h1 className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 drop-shadow-lg leading-tight tracking-tight">
+                        {/* Title */}
+                        <h1 className="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 drop-shadow-lg leading-tight tracking-tight mt-2">
                             MARIAM
                         </h1>
-                        <span className="text-sm md:text-xl font-bold text-yellow-100 tracking-[0.3em] uppercase mt-1 mb-6">
+                        <span className="text-xs md:text-lg font-bold text-yellow-100 tracking-[0.3em] uppercase mb-8">
                             WOMEN & KIDS
                         </span>
 
+                        {/* Start Button - Centered Inside the Ring */}
                         <button 
                             onClick={() => setShowSplash(false)}
-                            className="group relative px-8 py-3 md:px-10 md:py-4 bg-gradient-to-r from-yellow-600 via-yellow-500 to-yellow-600 text-white rounded-full text-lg md:text-xl font-black shadow-[0_0_30px_rgba(234,179,8,0.4)] hover:shadow-[0_0_50px_rgba(234,179,8,0.6)] transition-all hover:scale-105 active:scale-95 overflow-hidden border border-yellow-300/30"
+                            className="group relative px-8 py-3 md:px-12 md:py-4 bg-gradient-to-r from-yellow-600 via-yellow-500 to-yellow-600 text-white rounded-full text-lg md:text-xl font-black shadow-[0_0_30px_rgba(234,179,8,0.4)] hover:shadow-[0_0_50px_rgba(234,179,8,0.6)] transition-all hover:scale-105 active:scale-95 overflow-hidden border border-yellow-300/30"
                         >
                             <span className="relative z-10 flex items-center gap-3">
                                 ابدأ الآن <Sparkles size={20} className="animate-pulse"/>
@@ -112,9 +116,6 @@ const App: React.FC = () => {
                             <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
                         </button>
 
-                         <p className="text-gray-600 text-[10px] font-medium mt-4 tracking-widest uppercase opacity-60">
-                            Powered by Gemini 2.5
-                        </p>
                     </div>
                 </div>
 
@@ -123,12 +124,12 @@ const App: React.FC = () => {
       )}
 
       {/* Mobile Header */}
-      <div className="md:hidden bg-white p-4 flex items-center justify-between shadow-sm sticky top-0 z-20">
+      <div className="md:hidden bg-white p-4 flex items-center justify-between shadow-sm sticky top-0 z-20 border-b border-gray-100">
         <div className="flex items-center gap-2">
             <img src="/Mariam_women_kids.jpg" className="h-10 w-10 object-cover rounded-full border border-yellow-200" alt="Logo" onError={(e) => e.currentTarget.style.display = 'none'} />
-            <h1 className="text-lg font-black text-gold-shine">Mariam Studio</h1>
+            <h1 className="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-600 to-yellow-800">MARIAM W&K</h1>
         </div>
-        <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 bg-gray-100 rounded-lg">
+        <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 bg-gray-50 text-gray-700 rounded-lg hover:bg-gray-100">
           <Menu size={24} />
         </button>
       </div>
@@ -136,7 +137,7 @@ const App: React.FC = () => {
       {/* Sidebar Overlay for Mobile */}
       {isMobileMenuOpen && (
         <div 
-          className="fixed inset-0 bg-black/50 z-30 md:hidden"
+          className="fixed inset-0 bg-black/50 z-30 md:hidden backdrop-blur-sm"
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
@@ -158,33 +159,33 @@ const App: React.FC = () => {
 
       {/* Main Content */}
       <main className={`flex-1 p-4 md:p-8 lg:p-12 overflow-y-auto md:mr-[280px] transition-opacity duration-1000 ${showSplash ? 'opacity-0' : 'opacity-100'}`}>
-        <div className="max-w-5xl mx-auto animate-fade-in">
+        <div className="max-w-6xl mx-auto animate-fade-in">
           
-          {/* HEADER BANNER */}
+          {/* HEADER BANNER - Consistent across all pages */}
           <div 
-            className="w-full h-[200px] md:h-[240px] rounded-[30px] mb-10 relative shadow-[0_20px_60px_rgba(191,149,63,0.15)] overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black border border-yellow-600/30"
+            className="w-full h-[180px] md:h-[220px] rounded-[30px] mb-10 relative shadow-[0_20px_60px_rgba(191,149,63,0.15)] overflow-hidden bg-gradient-to-br from-[#0f0f0f] via-[#1a1a1a] to-[#2a2a2a] border border-yellow-600/30 group"
           >
              {/* Content Container */}
              <div className="absolute inset-0 flex flex-col items-center justify-center z-10 text-center">
-                <h1 className="text-sm md:text-lg font-medium text-yellow-500/80 mb-3 tracking-[0.2em] uppercase">
+                <h1 className="text-xs md:text-sm font-medium text-yellow-500/80 mb-2 tracking-[0.3em] uppercase">
                     مرحباً بالجميع مع
                 </h1>
                 
-                <div className="flex items-center gap-4 md:gap-6 justify-center">
+                <div className="flex items-center gap-4 md:gap-6 justify-center transition-transform duration-500 group-hover:scale-105">
                      <div className="relative">
-                        <div className="absolute inset-0 bg-yellow-500 blur-xl opacity-20 rounded-full"></div>
+                        <div className="absolute inset-0 bg-yellow-500 blur-xl opacity-20 rounded-full animate-pulse"></div>
                         <img 
                             src="/Mariam_women_kids.jpg" 
-                            className="h-20 md:h-28 w-20 md:w-28 object-cover rounded-full border-2 border-yellow-500/50 relative z-10" 
+                            className="h-20 w-20 md:h-28 md:w-28 object-cover rounded-full border-2 border-yellow-500/50 relative z-10 shadow-2xl" 
                             alt="Logo"
                             onError={(e) => e.currentTarget.style.display = 'none'}
                         />
                      </div>
                      <div className="flex flex-col items-start">
-                        <span className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-yellow-300 to-yellow-600 tracking-tight drop-shadow-sm py-1 leading-none">
+                        <span className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-600 tracking-tight drop-shadow-sm leading-none">
                             MARIAM
                         </span>
-                        <span className="text-lg md:text-2xl font-bold text-yellow-100 tracking-[0.3em] uppercase">
+                        <span className="text-sm md:text-xl font-bold text-yellow-100 tracking-[0.4em] uppercase mt-1">
                             WOMEN & KIDS
                         </span>
                      </div>
@@ -192,11 +193,11 @@ const App: React.FC = () => {
              </div>
              
              {/* Decorative Background Elements */}
-             <div className="absolute top-[-50%] left-[-10%] w-[600px] h-[600px] bg-yellow-600/10 rounded-full blur-3xl animate-pulse"></div>
-             <div className="absolute bottom-[-50%] right-[-10%] w-[600px] h-[600px] bg-orange-500/10 rounded-full blur-3xl"></div>
+             <div className="absolute top-[-50%] left-[-10%] w-[500px] h-[500px] bg-yellow-600/10 rounded-full blur-3xl animate-pulse"></div>
+             <div className="absolute bottom-[-50%] right-[-10%] w-[500px] h-[500px] bg-orange-500/10 rounded-full blur-3xl"></div>
              
              {/* Sparkles overlay */}
-             <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20"></div>
+             <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 mix-blend-overlay"></div>
           </div>
 
           {renderSection()}
