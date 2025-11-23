@@ -1,0 +1,8 @@
+{
+  "name": "Copy of Mariam_women_kids",
+  "description": "استوديو موسى - الإصدار النهائي. أداة احترافية للصور، دمج المنتجات، وتبديل الملابس.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

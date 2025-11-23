@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>استوديو موسى — Moussa AI Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Tajawal', 'sans-serif'],
+            },
+            colors: {
+              primary: '#007aff',
+              primaryHover: '#0062cc',
+              bgLight: '#f9f9f9',
+              card: '#ffffff',
+              gold: {
+                100: '#FBF5B7',
+                200: '#BF953F',
+                300: '#B38728',
+                400: '#AA771C',
+              }
+            },
+            animation: {
+              'shine': 'shine 3s linear infinite',
+              'fade-in': 'fadeIn 0.5s ease-out forwards',
+              'spin-slow': 'spin 15s linear infinite',
+            },
+            keyframes: {
+              shine: {
+                '0%': { backgroundPosition: '200% center' },
+                '100%': { backgroundPosition: '-200% center' },
+              },
+              fadeIn: {
+                '0%': { opacity: '0', transform: 'translateY(10px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      /* Product Fusion Slider Styles */
+      .pf-compare-wrapper {
+        margin-top: 30px;
+        position: relative;
+      }
+      .pf-compare {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 16px;
+        background-color: #f3f4f6; /* gray-100 */
+        min-height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #e5e7eb;
+      }
+      .pf-img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        max-height: 600px;
+      }
+      .pf-before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+      }
+      .pf-after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        /* Clipping logic is handled via inline styles in React */
+      }
+      
+      /* Range Slider Styling */
+      input[type=range] {
+        -webkit-appearance: none; 
+        appearance: none;
+        background: transparent; 
+        cursor: pointer;
+      }
+      input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        height: 20px;
+        width: 20px;
+        border-radius: 50%;
+        background: #ffffff;
+        border: 2px solid #9333ea; /* Purple-600 */
+        cursor: pointer;
+        margin-top: -8px; 
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      }
+      input[type=range]::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 4px;
+        background: #e5e7eb;
+        border-radius: 2px;
+      }
+      input[type=range]:focus {
+        outline: none;
+      }
+
+      /* Golden Text Utility */
+      .text-gold-shine {
+        background: linear-gradient(to right, #BF953F 20%, #FCF6BA 40%, #BF953F 60%, #AA771C 80%);
+        background-size: 200% auto;
+        color: #000;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shine 3s linear infinite;
+        text-shadow: 0px 2px 4px rgba(191, 149, 63, 0.3);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-markdown": "https://aistudiocdn.com/react-markdown@^10.1.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
+  }
+}
+</script>
+</head>
+  <body class="bg-gray-50 text-gray-900 font-sans antialiased">
+    <div id="root"></div>
+  </body>
+</html>
